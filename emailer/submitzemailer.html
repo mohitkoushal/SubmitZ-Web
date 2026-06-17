@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <title>SubmitZ – Smarter Expense Management</title>
+  <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings>
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <![endif]-->
+  <style>
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    img { -ms-interpolation-mode: bicubic; border: 0; line-height: 100%; outline: none; text-decoration: none; display: block; }
+    body { margin: 0 !important; padding: 0 !important; background-color: #0d0d0f; }
+
+    /* ===== FONTS ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+    /* ===== WRAPPER ===== */
+    .email-wrapper {
+      background-color: #0d0d0f;
+      padding: 32px 16px;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    }
+    .email-container {
+      max-width: 620px;
+      margin: 0 auto;
+      background-color: #111114;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(160, 60, 220, 0.18);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(160,60,220,0.08);
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      background: linear-gradient(135deg, #1a0a2e 0%, #12001f 40%, #0d0d0f 100%);
+      padding: 40px 48px 32px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(160,60,220,0.15);
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(160,60,220,0.22) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      bottom: -40px; left: -40px;
+      width: 180px; height: 180px;
+      background: radial-gradient(circle, rgba(120,0,200,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      position: relative; z-index: 1;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-img {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: #000;
+    }
+    .logo-name {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+    .logo-name span {
+      background: linear-gradient(135deg, #c060f0 0%, #8b00e8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .header-link {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+    .hero-eyebrow {
+      position: relative; z-index: 1;
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(160,60,220,0.2) 0%, rgba(130,0,220,0.12) 100%);
+      border: 1px solid rgba(160,60,220,0.35);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #b560e8;
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: '●';
+      color: #a030e0;
+      margin-right: 7px;
+      font-size: 8px;
+      vertical-align: middle;
+    }
+    .hero-headline {
+      position: relative; z-index: 1;
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: 38px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #ffffff;
+      margin: 0 0 16px;
+      letter-spacing: -1px;
+    }
+    .hero-headline .gradient-text {
+      background: linear-gradient(135deg, #c060f0 0%, #8020d0 60%, #6000b0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      position: relative; z-index: 1;
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.55);
+      margin: 0 0 36px;
+      max-width: 460px;
+      font-weight: 400;
+    }
+    .hero-cta-row {
+      position: relative; z-index: 1;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: linear-gradient(135deg, #a030e0 0%, #7000c0 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      padding: 13px 28px;
+      border-radius: 100px;
+      box-shadow: 0 4px 24px rgba(140,0,220,0.45), 0 1px 0 rgba(255,255,255,0.08) inset;
+    }
+    .btn-secondary {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.75) !important;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 24px;
+      border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: linear-gradient(90deg, rgba(160,60,220,0.08) 0%, rgba(100,0,180,0.06) 100%);
+      border-top: 1px solid rgba(160,60,220,0.12);
+      border-bottom: 1px solid rgba(160,60,220,0.12);
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #c060f0;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* ===== BODY SECTIONS ===== */
+    .body-wrap { padding: 0 48px; }
+    .section { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .section:last-child { border-bottom: none; }
+    .section-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9030d0;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #f0f0f5;
+      margin: 0 0 10px;
+      letter-spacing: -0.4px;
+      line-height: 1.3;
+    }
+    .section-body {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin: 0 0 24px;
+    }
+
+    /* ===== FEATURE CARDS ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(160,60,220,0.4), transparent);
+    }
+    .feature-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .feature-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e8e8f0;
+      margin-bottom: 5px;
+      letter-spacing: -0.2px;
+    }
+    .feature-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ===== HIGHLIGHT STRIP ===== */
+    .highlight-strip {
+      background: linear-gradient(135deg, #1c0535 0%, #180040 50%, #0d0d20 100%);
+      border: 1px solid rgba(160,60,220,0.2);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin: 8px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .highlight-strip::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(150,0,220,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .highlight-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9030c8;
+      margin-bottom: 10px;
+    }
+    .highlight-quote {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #f0eaff;
+      line-height: 1.5;
+      margin: 0 0 20px;
+      position: relative; z-index: 1;
+    }
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative; z-index: 1;
+    }
+    .author-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #8020c0, #5000a0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .author-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #d0c8e8;
+    }
+    .author-role {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+    }
+    .stars {
+      color: #c060f0;
+      font-size: 12px;
+      letter-spacing: 1px;
+      margin-bottom: 2px;
+    }
+
+    /* ===== PROCESS STEPS ===== */
+    .steps-list {
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    .step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .step-item:last-child { border-bottom: none; }
+    .step-num {
+      width: 32px; height: 32px;
+      background: linear-gradient(135deg, rgba(140,0,220,0.25), rgba(100,0,180,0.15));
+      border: 1px solid rgba(140,60,220,0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #b050e8;
+      flex-shrink: 0;
+    }
+    .step-content {}
+    .step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e0daf0;
+      margin-bottom: 3px;
+    }
+    .step-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      line-height: 1.5;
+    }
+
+    /* ===== CTA BLOCK ===== */
+    .cta-block {
+      background: linear-gradient(135deg, #200050 0%, #180040 60%, #0e0030 100%);
+      text-align: center;
+      padding: 52px 48px;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(160,60,220,0.15);
+    }
+    .cta-block::before {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px; height: 300px;
+      background: radial-gradient(ellipse, rgba(140,0,220,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-badge {
+      display: inline-block;
+      background: rgba(140,0,220,0.15);
+      border: 1px solid rgba(160,60,220,0.3);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #b060e0;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      position: relative; z-index: 1;
+    }
+    .cta-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.2;
+      margin: 0 0 12px;
+      letter-spacing: -0.8px;
+      position: relative; z-index: 1;
+    }
+    .cta-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.6;
+      margin: 0 0 32px;
+      position: relative; z-index: 1;
+    }
+    .cta-btn-wrap {
+      position: relative; z-index: 1;
+    }
+    .btn-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, #b040f0 0%, #7000c0 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 100px;
+      letter-spacing: 0.2px;
+      box-shadow: 0 8px 40px rgba(140,0,220,0.55), 0 2px 0 rgba(255,255,255,0.1) inset;
+    }
+    .cta-note {
+      margin-top: 14px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      position: relative; z-index: 1;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0a0a0c;
+      padding: 32px 48px;
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 6px;
+    }
+    .footer-logo span {
+      color: #8020c0;
+    }
+    .footer-tagline {
+      font-size: 11px;
+      color: rgba(255,255,255,0.22);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.05);
+      margin: 16px 0;
+    }
+    .footer-legal {
+      font-size: 10px;
+      color: rgba(255,255,255,0.18);
+      line-height: 1.6;
+    }
+    .footer-contact {
+      font-size: 11px;
+      color: rgba(255,255,255,0.28);
+      margin-top: 12px;
+    }
+    .footer-contact a {
+      color: #8020c0;
+      text-decoration: none;
+    }
+    .purple-dot {
+      display: inline-block;
+      width: 5px; height: 5px;
+      background: #8020c0;
+      border-radius: 50%;
+      vertical-align: middle;
+      margin: 0 8px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media only screen and (max-width: 600px) {
+      .hero-headline { font-size: 26px !important; }
+      .hero-cta-row { flex-direction: column !important; }
+      .hero-cta-row a { text-align: center; }
+      .body-wrap, .header, .footer, .cta-block { padding-left: 24px !important; padding-right: 24px !important; }
+      .stats-bar { padding: 20px 24px !important; }
+      .feature-grid { grid-template-columns: 1fr !important; }
+      .stat-number { font-size: 20px !important; }
+      .highlight-strip { padding: 24px 20px !important; }
+      .cta-heading { font-size: 22px !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="email-wrapper">
+  <div class="email-container">
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+      <div class="header-nav">
+        <a href="https://www.submitz.com/" class="logo-wrap" style="text-decoration:none;">
+          <img src="data:image/jpeg;base64,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" alt="SubmitZ Logo" class="logo-img" width="40" height="40" style="border-radius:10px; width:40px; height:40px; object-fit:cover;" />
+          <span class="logo-name">Submit<span>Z</span></span>
+        </a>
+        <a href="https://www.submitz.com/emailer/submitzemailer.html" class="header-link" style="color:rgba(255,255,255,0.4); text-decoration:none; font-size:12px; font-family:'Inter',sans-serif;">View in browser</a>
+      </div>
+
+      <div class="hero-eyebrow">🚀 New Feature Release</div>
+
+      <h1 class="hero-headline">
+        Stop chasing<br>
+        expense reports.<br>
+        <span class="gradient-text">Let SubmitZ do it.</span>
+      </h1>
+
+      <p class="hero-sub">
+        SubmitZ is the all-in-one Travel, Expense &amp; Reimbursement platform that replaces manual paperwork with intelligent automation — built for businesses of every size.
+      </p>
+
+      <div class="hero-cta-row">
+        <a href="https://wa.me/919311581081?text=Thanks%20for%20the%20email.%20I%20am%20interested%20in%20SubmitZ.%20I%20want%20to%20know%20more%20about%20SubmitZ.%20Please%20call%20me%20back." class="btn-primary" style="background:linear-gradient(135deg,#a030e0 0%,#7000c0 100%); color:#fff; text-decoration:none; font-size:14px; font-weight:600; padding:13px 28px; border-radius:100px; display:inline-block;">Start Free Trial</a>
+        <a href="tel:+919311581081" class="btn-secondary" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.75); text-decoration:none; font-size:14px; font-weight:500; padding:13px 24px; border-radius:100px; border:1px solid rgba(255,255,255,0.1); display:inline-block;">📞 Talk to Sales</a>
+      </div>
+    </div>
+
+    <!-- ===== STATS BAR ===== -->
+    <div class="stats-bar" style="display:flex; justify-content:space-between; padding:24px 48px; background:linear-gradient(90deg,rgba(160,60,220,0.08),rgba(100,0,180,0.06)); border-top:1px solid rgba(160,60,220,0.12); border-bottom:1px solid rgba(160,60,220,0.12);">
+      <div class="stat-item" style="text-align:center;">
+        <div class="stat-number" style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:#c060f0; line-height:1; margin-bottom:5px;">20+</div>
+        <div class="stat-label" style="font-size:11px; color:rgba(255,255,255,0.4); font-weight:500; letter-spacing:0.5px; text-transform:uppercase;">Pre-built Reports</div>
+      </div>
+      <div class="stat-item" style="text-align:center;">
+        <div class="stat-number" style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:#c060f0; line-height:1; margin-bottom:5px;">100%</div>
+        <div class="stat-label" style="font-size:11px; color:rgba(255,255,255,0.4); font-weight:500; letter-spacing:0.5px; text-transform:uppercase;">Customizable</div>
+      </div>
+      <div class="stat-item" style="text-align:center;">
+        <div class="stat-number" style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:#c060f0; line-height:1; margin-bottom:5px;">&lt;1 Min</div>
+        <div class="stat-label" style="font-size:11px; color:rgba(255,255,255,0.4); font-weight:500; letter-spacing:0.5px; text-transform:uppercase;">Avg. Response Time</div>
+      </div>
+      <div class="stat-item" style="text-align:center;">
+        <div class="stat-number" style="font-family:'Space Grotesk',sans-serif; font-size:26px; font-weight:700; color:#c060f0; line-height:1; margin-bottom:5px;">5★</div>
+        <div class="stat-label" style="font-size:11px; color:rgba(255,255,255,0.4); font-weight:500; letter-spacing:0.5px; text-transform:uppercase;">Google Rating</div>
+      </div>
+    </div>
+
+    <!-- ===== BODY ===== -->
+    <div class="body-wrap" style="padding:0 48px;">
+
+      <!-- Features Section -->
+      <div class="section" style="padding:40px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div class="section-eyebrow" style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#9030d0; margin-bottom:12px; font-family:'Inter',sans-serif;">Everything You Need</div>
+        <h2 class="section-heading" style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:#f0f0f5; margin:0 0 10px; letter-spacing:-0.4px; line-height:1.3;">One platform for every<br>expense workflow</h2>
+        <p class="section-body" style="font-size:14px; color:rgba(255,255,255,0.5); line-height:1.7; margin:0 0 24px; font-family:'Inter',sans-serif;">From travel booking to final reimbursement, SubmitZ handles the entire journey — eliminating fraud, reducing errors, and giving you real-time visibility into your spending.</p>
+
+        <!-- Feature Cards — table-safe layout for email clients -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing:14px; border-collapse:separate;">
+          <tr>
+            <td width="50%" valign="top" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px; position:relative;">
+              <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(160,60,220,0.4),transparent);"></div>
+              <span style="font-size:22px; margin-bottom:10px; display:block;">✈️</span>
+              <div style="font-size:13px; font-weight:700; color:#e8e8f0; margin-bottom:5px; font-family:'Space Grotesk',sans-serif;">Travel Management</div>
+              <p style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.55; margin:0; font-family:'Inter',sans-serif;">Flights, hotels, cabs &amp; more — all domestic and international trips in one place.</p>
+            </td>
+            <td width="50%" valign="top" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px; position:relative;">
+              <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(160,60,220,0.4),transparent);"></div>
+              <span style="font-size:22px; margin-bottom:10px; display:block;">🧾</span>
+              <div style="font-size:13px; font-weight:700; color:#e8e8f0; margin-bottom:5px; font-family:'Space Grotesk',sans-serif;">Expense Tracking</div>
+              <p style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.55; margin:0; font-family:'Inter',sans-serif;">Scan receipts instantly. Categorize, submit, and reconcile with zero manual effort.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%" valign="top" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px; position:relative;">
+              <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(160,60,220,0.4),transparent);"></div>
+              <span style="font-size:22px; margin-bottom:10px; display:block;">💸</span>
+              <div style="font-size:13px; font-weight:700; color:#e8e8f0; margin-bottom:5px; font-family:'Space Grotesk',sans-serif;">Reimbursements</div>
+              <p style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.55; margin:0; font-family:'Inter',sans-serif;">Automate approval workflows. Employees get paid faster, no paperwork needed.</p>
+            </td>
+            <td width="50%" valign="top" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px; position:relative;">
+              <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(160,60,220,0.4),transparent);"></div>
+              <span style="font-size:22px; margin-bottom:10px; display:block;">📊</span>
+              <div style="font-size:13px; font-weight:700; color:#e8e8f0; margin-bottom:5px; font-family:'Space Grotesk',sans-serif;">Budgeting &amp; Analytics</div>
+              <p style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.55; margin:0; font-family:'Inter',sans-serif;">Real-time dashboards and 20+ prebuilt reports to keep spending on track.</p>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%" valign="top" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px; position:relative;">
+              <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(160,60,220,0.4),transparent);"></div>
+              <span style="font-size:22px; margin-bottom:10px; display:block;">🛡️</span>
+              <div style="font-size:13px; font-weight:700; color:#e8e8f0; margin-bottom:5px; font-family:'Space Grotesk',sans-serif;">Policy &amp; Compliance</div>
+              <p style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.55; margin:0; font-family:'Inter',sans-serif;">Custom approval rules and audit-ready trails. Catch policy violations automatically.</p>
+            </td>
+            <td width="50%" valign="top" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07); border-radius:14px; padding:20px; position:relative;">
+              <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,rgba(160,60,220,0.4),transparent);"></div>
+              <span style="font-size:22px; margin-bottom:10px; display:block;">🌏</span>
+              <div style="font-size:13px; font-weight:700; color:#e8e8f0; margin-bottom:5px; font-family:'Space Grotesk',sans-serif;">Multi-lingual &amp; Currency</div>
+              <p style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.55; margin:0; font-family:'Inter',sans-serif;">Manage global teams in their preferred language and any currency — seamlessly.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- Testimonial Section -->
+      <div class="section" style="padding:40px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+        <div class="section-eyebrow" style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#9030d0; margin-bottom:12px; font-family:'Inter',sans-serif;">Client Stories</div>
+        <h2 class="section-heading" style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:#f0f0f5; margin:0 0 20px; letter-spacing:-0.4px;">Trusted by teams across India</h2>
+
+        <div class="highlight-strip" style="background:linear-gradient(135deg,#1c0535 0%,#180040 50%,#0d0d20 100%); border:1px solid rgba(160,60,220,0.2); border-radius:16px; padding:32px 36px; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:-80px; right:-80px; width:200px; height:200px; background:radial-gradient(circle,rgba(150,0,220,0.18) 0%,transparent 70%); border-radius:50%;"></div>
+          <div class="stars" style="color:#c060f0; font-size:14px; letter-spacing:2px; margin-bottom:10px;">★★★★★</div>
+          <p class="highlight-quote" style="font-family:'Space Grotesk',sans-serif; font-size:18px; font-weight:600; color:#f0eaff; line-height:1.5; margin:0 0 20px; position:relative; z-index:1;">"SubmitZ is just easy and user-friendly software to manage and track business trips and all other expenses as well as reimbursement claims."</p>
+          <div class="quote-author" style="display:flex; align-items:center; gap:12px; position:relative; z-index:1;">
+            <div style="width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#8020c0,#5000a0); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; color:#fff; flex-shrink:0; font-family:'Space Grotesk',sans-serif;">VA</div>
+            <div>
+              <div style="font-size:13px; font-weight:600; color:#d0c8e8; font-family:'Inter',sans-serif;">Vijay Agarwal</div>
+              <div style="font-size:11px; color:rgba(255,255,255,0.35); font-family:'Inter',sans-serif;">Owner · Manufacturing Company</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Implementation Steps -->
+      <div class="section" style="padding:40px 0;">
+        <div class="section-eyebrow" style="font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#9030d0; margin-bottom:12px; font-family:'Inter',sans-serif;">Getting Started</div>
+        <h2 class="section-heading" style="font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; color:#f0f0f5; margin:0 0 6px; letter-spacing:-0.4px;">Live in 4 simple steps</h2>
+        <p class="section-body" style="font-size:14px; color:rgba(255,255,255,0.45); line-height:1.7; margin:0 0 20px; font-family:'Inter',sans-serif;">Our team handles the entire setup so you can focus on what matters — your business.</p>
+
+        <ul class="steps-list" style="list-style:none; margin:0; padding:0;">
+          <li class="step-item" style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+            <div class="step-num" style="width:32px; height:32px; background:linear-gradient(135deg,rgba(140,0,220,0.25),rgba(100,0,180,0.15)); border:1px solid rgba(140,60,220,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; color:#b050e8; flex-shrink:0; text-align:center; line-height:32px;">01</div>
+            <div>
+              <div class="step-title" style="font-size:13px; font-weight:700; color:#e0daf0; margin-bottom:3px; font-family:'Inter',sans-serif;">Discovery &amp; Consultation</div>
+              <div class="step-desc" style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.5; font-family:'Inter',sans-serif;">We analyze your current process, pain points, and business goals together.</div>
+            </div>
+          </li>
+          <li class="step-item" style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+            <div class="step-num" style="width:32px; height:32px; background:linear-gradient(135deg,rgba(140,0,220,0.25),rgba(100,0,180,0.15)); border:1px solid rgba(140,60,220,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; color:#b050e8; flex-shrink:0; text-align:center; line-height:32px;">02</div>
+            <div>
+              <div class="step-title" style="font-size:13px; font-weight:700; color:#e0daf0; margin-bottom:3px; font-family:'Inter',sans-serif;">Planning &amp; Strategy</div>
+              <div class="step-desc" style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.5; font-family:'Inter',sans-serif;">We design a custom automation blueprint that replaces your inefficient manual process.</div>
+            </div>
+          </li>
+          <li class="step-item" style="display:flex; gap:16px; align-items:flex-start; padding:16px 0; border-bottom:1px solid rgba(255,255,255,0.04);">
+            <div class="step-num" style="width:32px; height:32px; background:linear-gradient(135deg,rgba(140,0,220,0.25),rgba(100,0,180,0.15)); border:1px solid rgba(140,60,220,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; color:#b050e8; flex-shrink:0; text-align:center; line-height:32px;">03</div>
+            <div>
+              <div class="step-title" style="font-size:13px; font-weight:700; color:#e0daf0; margin-bottom:3px; font-family:'Inter',sans-serif;">Tailored Solution</div>
+              <div class="step-desc" style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.5; font-family:'Inter',sans-serif;">We present the best-fit offering and ensure every pain point is eliminated.</div>
+            </div>
+          </li>
+          <li class="step-item" style="display:flex; gap:16px; align-items:flex-start; padding:16px 0;">
+            <div class="step-num" style="width:32px; height:32px; background:linear-gradient(135deg,rgba(140,0,220,0.25),rgba(100,0,180,0.15)); border:1px solid rgba(140,60,220,0.3); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-size:13px; font-weight:700; color:#b050e8; flex-shrink:0; text-align:center; line-height:32px;">04</div>
+            <div>
+              <div class="step-title" style="font-size:13px; font-weight:700; color:#e0daf0; margin-bottom:3px; font-family:'Inter',sans-serif;">Go Live</div>
+              <div class="step-desc" style="font-size:12px; color:rgba(255,255,255,0.38); line-height:1.5; font-family:'Inter',sans-serif;">Implementation begins and SubmitZ is ready to transform your expense operations.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /body-wrap -->
+
+    <!-- ===== CTA BLOCK ===== -->
+    <div class="cta-block" style="background:linear-gradient(135deg,#200050 0%,#180040 60%,#0e0030 100%); text-align:center; padding:52px 48px; position:relative; overflow:hidden; border-top:1px solid rgba(160,60,220,0.15);">
+      <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:400px; height:300px; background:radial-gradient(ellipse,rgba(140,0,220,0.2) 0%,transparent 70%); pointer-events:none;"></div>
+      <div style="display:inline-block; background:rgba(140,0,220,0.15); border:1px solid rgba(160,60,220,0.3); border-radius:100px; padding:5px 14px; font-size:11px; font-weight:600; color:#b060e0; letter-spacing:1px; text-transform:uppercase; margin-bottom:18px; position:relative; z-index:1; font-family:'Inter',sans-serif;">Free Trial Available</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif; font-size:30px; font-weight:700; color:#ffffff; line-height:1.2; margin:0 0 12px; letter-spacing:-0.8px; position:relative; z-index:1;">Ready to simplify your<br>expense management?</h2>
+      <p style="font-size:14px; color:rgba(255,255,255,0.45); line-height:1.6; margin:0 0 32px; position:relative; z-index:1; font-family:'Inter',sans-serif;">Join businesses across India that use SubmitZ to cut reimbursement time, eliminate fraud, and gain full financial visibility — all from one platform.</p>
+      <div style="position:relative; z-index:1;">
+        <a href="https://www.submitz.com/" class="btn-cta" style="display:inline-block; background:linear-gradient(135deg,#b040f0 0%,#7000c0 100%); color:#ffffff; text-decoration:none; font-size:15px; font-weight:700; padding:16px 40px; border-radius:100px; letter-spacing:0.2px; box-shadow:0 8px 40px rgba(140,0,220,0.55); font-family:'Inter',sans-serif;">Get Started Free →</a>
+      </div>
+      <p style="margin-top:14px; font-size:11px; color:rgba(255,255,255,0.28); position:relative; z-index:1; font-family:'Inter',sans-serif;">No setup fees &nbsp;·&nbsp; No credit card required &nbsp;·&nbsp; 100% customizable</p>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer" style="background:#0a0a0c; padding:32px 48px; border-top:1px solid rgba(255,255,255,0.04);">
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:4px;">Submit<span style="color:#8020c0;">Z</span></div>
+      <div style="font-size:11px; color:rgba(255,255,255,0.22); margin-bottom:20px; font-family:'Inter',sans-serif;">Travel, Expense &amp; Reimbursement Management · Delhi, India</div>
+
+      <div style="display:flex; gap:18px; flex-wrap:wrap; margin-bottom:16px;">
+        <a href="https://www.submitz.com/" style="font-size:11px; color:rgba(255,255,255,0.3); text-decoration:none; font-weight:500; font-family:'Inter',sans-serif;">Website</a>
+        <a href="https://www.submitz.com/faqs.html" style="font-size:11px; color:rgba(255,255,255,0.3); text-decoration:none; font-weight:500; font-family:'Inter',sans-serif;">FAQs</a>
+        <a href="https://www.submitz.com/contact.html" style="font-size:11px; color:rgba(255,255,255,0.3); text-decoration:none; font-weight:500; font-family:'Inter',sans-serif;">Contact</a>
+        <a href="https://www.submitz.com/privacy-policy.html" style="font-size:11px; color:rgba(255,255,255,0.3); text-decoration:none; font-weight:500; font-family:'Inter',sans-serif;">Privacy Policy</a>
+        <a href="https://www.submitz.com/terms-and-conditions.html" style="font-size:11px; color:rgba(255,255,255,0.3); text-decoration:none; font-weight:500; font-family:'Inter',sans-serif;">Terms</a>
+      </div>
+
+      <div style="height:1px; background:rgba(255,255,255,0.05); margin:16px 0;"></div>
+
+      <div style="font-size:10px; color:rgba(255,255,255,0.18); line-height:1.6; font-family:'Inter',sans-serif;">
+        © 2024 SubmitZ. All rights reserved. &nbsp;·&nbsp; You're receiving this because you signed up at submitz.com.<br>
+        <a href="#" style="color:#8020c0; text-decoration:none;">Unsubscribe</a> &nbsp;·&nbsp; <a href="#" style="color:#8020c0; text-decoration:none;">Update preferences</a>
+      </div>
+
+      <div style="font-size:11px; color:rgba(255,255,255,0.28); margin-top:12px; font-family:'Inter',sans-serif;">
+        📞 <a href="tel:+919311581081" style="color:#8020c0; text-decoration:none;">+91 93115 81081</a>
+        &nbsp;&nbsp;
+        ✉️ <a href="mailto:submitzinfo@gmail.com" style="color:#8020c0; text-decoration:none;">submitzinfo@gmail.com</a>
+      </div>
+    </div>
+
+  </div><!-- /email-container -->
+</div><!-- /email-wrapper -->
+</body>
+</html>
