@@ -1680,7 +1680,7 @@ header.style-1 .main-menu>ul>li{
 }
 @media(max-width:1399px){
     header.style-1 .main-menu>ul>li{
-        padding:0 20px
+        padding:0 13px
     }
 }
 @media(max-width:991px){
@@ -8335,8 +8335,8 @@ header.style-3 .main-menu>ul li.menu-item-has-children>i{
     opacity:1
 }
 .pricing-card .batch{
-    width:63px;
-    height:59px;
+    width:83px;
+    height:69px;
     border-radius:0 0 100px 100px;
     background:var(--primary-color1);
     display:flex;
