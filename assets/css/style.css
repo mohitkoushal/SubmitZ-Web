@@ -8454,7 +8454,7 @@ header.style-3 .main-menu>ul li.menu-item-has-children>i{
 .home2-pricing-plan-section .pricing-plan-tab-area nav .nav-tabs .nav-link span{
     font-family:var(--font-inter);
     font-weight:700;
-    font-size:8px;
+    font-size:13px;
     text-transform:uppercase;
     color:var(--dark-white-color);
     background:var(--title-color);

@@ -433,37 +433,15 @@
             </div>
          </div>
       </div>
-      <!-- FAQ Search Bar -->
-      <div id="faq-search-section" style="background:#f8f4fc; padding: 32px 0 20px 0; border-bottom: 1px solid #e8d8f8;">
-        <div class="container">
-          <div style="max-width:680px; margin:0 auto; text-align:center;">
-            <p style="font-size:15px; color:#000; margin-bottom:14px; font-weight:500; letter-spacing:0.01em;">Search through all FAQs</p>
-            <div style="position:relative; display:flex; align-items:center;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9b59b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position:absolute; left:16px; pointer-events:none; z-index:1;">
-                <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
-              <input
-                type="text"
-                id="faqSearchInput"
-                placeholder="Type a keyword, e.g. &quot;reimbursement&quot; or &quot;cloud&quot;…"
-                autocomplete="off"
-                style="width:100%; padding:14px 48px 14px 48px; font-size:16px; border:2px solid #d4b0f0; border-radius:50px; outline:none; color:#222; background:#fff; box-shadow:0 2px 12px rgba(155,89,182,0.10); transition:border-color 0.2s;"
-                onfocus="this.style.borderColor='#9b59b6'"
-                onblur="this.style.borderColor='#d4b0f0'"
-              >
-              <button onclick="clearFaqSearch()" id="faqClearBtn" title="Clear search"
-                style="display:none; position:absolute; right:16px; background:none; border:none; cursor:pointer; padding:4px; color:#999; font-size:20px; line-height:1;">&#x2715;</button>
-            </div>
-            <div id="faqSearchStatus" style="margin-top:12px; font-size:14px; color:#888; min-height:20px;"></div>
-          </div>
-        </div>
-      </div>
-      <!-- End FAQ Search Bar -->
-
       <div class="faq-section scroll-margin pt-120 mb-120" id="faq-section">
          <div class="container">
             <div class="row g-4 mb-120">
-               <div class="col-lg-12">
+               <div class="col-lg-4 d-flex justify-content-lg-center align-items-lg-center">
+                  <div class="verticle-text">
+                     <h2>General</h2>
+                  </div>
+               </div>
+               <div class="col-lg-8">
                   <div class="faq-content style-2">
                      <div class="accordion" id="accordionGeneral">
 
@@ -3225,151 +3203,6 @@
          });
       </script>
 	  
-      <!-- FAQ Search Script -->
-      <script>
-        (function () {
-          var searchInput = document.getElementById('faqSearchInput');
-          var statusEl   = document.getElementById('faqSearchStatus');
-          var clearBtn   = document.getElementById('faqClearBtn');
-
-          // Collect all accordion items once DOM is ready
-          var allItems = [];
-          function buildIndex() {
-            var items = document.querySelectorAll('.accordion-item');
-            items.forEach(function (item) {
-              var btn  = item.querySelector('.accordion-button');
-              var body = item.querySelector('.accordion-body');
-              if (btn && body) {
-                allItems.push({
-                  item  : item,
-                  question : btn.textContent.trim().toLowerCase(),
-                  answer   : body.textContent.trim().toLowerCase(),
-                  // store the section wrapper for show/hide
-                  section  : findSection(item)
-                });
-              }
-            });
-          }
-
-          // Walk up to the col-lg-8 wrapper that contains this accordion
-          function findSection(el) {
-            var p = el.parentElement;
-            while (p) {
-              if (p.classList && p.classList.contains('faq-content')) return p.closest('.row');
-              p = p.parentElement;
-            }
-            return null;
-          }
-
-          function doSearch(query) {
-            query = query.trim().toLowerCase();
-            clearBtn.style.display = query ? 'block' : 'none';
-
-            if (!query) {
-              // Restore everything
-              allItems.forEach(function (d) {
-                d.item.style.display = '';
-                unhighlight(d.item);
-              });
-              document.querySelectorAll('.faq-section .row').forEach(function (r) { r.style.display = ''; });
-              document.getElementById('faqNoResults') && document.getElementById('faqNoResults').remove();
-              statusEl.textContent = '';
-              return;
-            }
-
-            var matched = 0;
-            var visibleSections = new Set();
-
-            allItems.forEach(function (d) {
-              var hit = d.question.includes(query) || d.answer.includes(query);
-              d.item.style.display = hit ? '' : 'none';
-              if (hit) {
-                matched++;
-                if (d.section) visibleSections.add(d.section);
-                // Auto-expand matched items
-                var collapseEl = d.item.querySelector('.accordion-collapse');
-                var btnEl      = d.item.querySelector('.accordion-button');
-                if (collapseEl) { collapseEl.classList.add('show'); }
-                if (btnEl)      { btnEl.classList.remove('collapsed'); btnEl.setAttribute('aria-expanded','true'); }
-                highlight(d.item, query);
-              } else {
-                unhighlight(d.item);
-                var collapseEl = d.item.querySelector('.accordion-collapse');
-                var btnEl      = d.item.querySelector('.accordion-button');
-                if (collapseEl) { collapseEl.classList.remove('show'); }
-                if (btnEl)      { btnEl.classList.add('collapsed'); btnEl.setAttribute('aria-expanded','false'); }
-              }
-            });
-
-            // Show/hide whole category rows
-            document.querySelectorAll('.faq-section .row').forEach(function (r) {
-              r.style.display = visibleSections.has(r) ? '' : 'none';
-            });
-
-            // No-results banner
-            var existing = document.getElementById('faqNoResults');
-            if (matched === 0) {
-              if (!existing) {
-                var banner = document.createElement('div');
-                banner.id = 'faqNoResults';
-                banner.style.cssText = 'text-align:center;padding:40px 20px;color:#888;font-size:16px;';
-                banner.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#d4b0f0" stroke-width="1.5" style="display:block;margin:0 auto 12px"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>No FAQs matched <strong>&ldquo;' + escHtml(query) + '&rdquo;</strong>. Try a different keyword.';
-                document.querySelector('.faq-section .container').appendChild(banner);
-              }
-            } else {
-              if (existing) existing.remove();
-            }
-
-            statusEl.textContent = matched > 0
-              ? matched + ' result' + (matched === 1 ? '' : 's') + ' found'
-              : '';
-          }
-
-          // Simple text highlight
-          function highlight(item, query) {
-            unhighlight(item);
-            var btn  = item.querySelector('.accordion-button');
-            var body = item.querySelector('.accordion-body');
-            [btn, body].forEach(function (el) {
-              if (!el) return;
-              el.innerHTML = el.innerHTML.replace(
-                new RegExp('(' + regEsc(query) + ')', 'gi'),
-                '<mark style="background:#f3d6ff;color:#5a1a8a;border-radius:3px;padding:0 2px;">$1</mark>'
-              );
-            });
-          }
-
-          function unhighlight(item) {
-            var btn  = item.querySelector('.accordion-button');
-            var body = item.querySelector('.accordion-body');
-            [btn, body].forEach(function (el) {
-              if (!el) return;
-              el.innerHTML = el.innerHTML.replace(/<mark[^>]*>(.*?)<\/mark>/gi, '$1');
-            });
-          }
-
-          function regEsc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-          function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-
-          window.clearFaqSearch = function () {
-            searchInput.value = '';
-            doSearch('');
-            searchInput.focus();
-          };
-
-          // Debounce for smooth typing
-          var debounceTimer;
-          searchInput.addEventListener('input', function () {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(function () { doSearch(searchInput.value); }, 200);
-          });
-
-          // Build index after page scripts have run
-          window.addEventListener('load', buildIndex);
-        })();
-      </script>
-      <!-- End FAQ Search Script -->
-
 	  <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

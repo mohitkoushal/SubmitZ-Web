@@ -14,8 +14,90 @@
       <link rel="stylesheet" href="assets/css/slick-theme.css">
       <link href="assets/css/boxicons.min.css" rel="stylesheet">
       <link rel="stylesheet" href="assets/css/style.css">
-      <title>Empower employees to request and obtain approval for essential purchases before or during business travel- SubmitZ</title>
+		<title>SubmitZ Pricing Plans | Affordable Travel &amp; Expense Management Software Pricing India</title>
+
+		<meta name="description" content="Explore SubmitZ pricing plans for travel and expense management software — built for Indian businesses of every size. Get transparent, affordable pricing with no hidden charges. Compare plans and choose the right solution for your team. Request a free demo today." />
+
+		<meta name="keywords" content="SubmitZ pricing, SubmitZ pricing plans, expense management software pricing India, travel expense software pricing India, affordable expense management software India, expense software price per user India, expense management software cost India, SubmitZ subscription cost India, SubmitZ plans and pricing, expense software monthly pricing India, expense management software plans India, transparent expense software pricing India, no hidden fees expense software India, expense software free demo India, best value expense management software India, scalable expense software pricing India, expense software SMB pricing India, expense software enterprise pricing India, SubmitZ expense management software pricing plans India, affordable travel expense management software pricing for Indian businesses, expense management software price per user per month India, transparent no hidden charges expense software pricing India, best affordable expense management software pricing for SMB India 2026, how much does expense management software cost in India, SubmitZ pricing plans for travel expense CRM and reimbursement India, expense software pricing Delhi India, expense management software subscription India, best expense software price India 2026, expense software price INR India, expense management software free trial India, SubmitZ vs Zoho Expense pricing India, SubmitZ vs Happay pricing comparison India, SubmitZ vs Fyle pricing India, cheaper alternative to SAP Concur India, expense software cheaper than Happay India, low cost expense management software India, value for money expense software India, expense management software for small business India pricing, affordable alternative expense software India" />
+
+		<!-- Open Graph (for social sharing) -->
+		<meta property="og:title" content="SubmitZ Pricing Plans | Affordable Travel &amp; Expense Management Software India" />
+		<meta property="og:description" content="Explore SubmitZ pricing plans — transparent, affordable expense management software for Indian businesses. No hidden fees. All features included. Request a free demo or personalised quote today." />
+		<meta property="og:url" content="https://www.submitz.com/pricing-plan.html" />
+		<meta property="og:type" content="website" />
       <link rel="icon" href="assets/img/sm-logo.svg" type="image/gif" sizes="20x20">
+ 
+<script>
+
+async function detectCurrency(){
+
+    const saved=localStorage.getItem("submitz_currency");
+
+    if(saved){
+
+        changePrices(saved);
+
+        return;
+
+    }
+
+    try{
+
+        const response=await fetch("https://ipwho.is/");
+
+        const data=await response.json();
+
+        let currency="USD";
+
+        if(data.country_code==="IN"){
+
+            currency="INR";
+
+        }
+
+        localStorage.setItem("submitz_currency",currency);
+
+        changePrices(currency);
+
+    }
+
+    catch(e){
+
+        changePrices("USD");
+
+    }
+
+}
+
+function changePrices(currency){
+
+    document.querySelectorAll(".amount").forEach(function(price){
+
+        if(currency==="INR"){
+
+            price.innerHTML=price.dataset.inr;
+
+            price.parentNode.querySelector(".currency").innerHTML="₹";
+
+        }
+
+        else{
+
+            price.innerHTML=price.dataset.usd;
+
+            price.parentNode.querySelector(".currency").innerHTML="$";
+
+        }
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded",detectCurrency);
+
+</script>
+ 
+ 
    </head>
    <body>
       <div class="sidebar-menu">
@@ -213,7 +295,15 @@
                                        <path d="M8.33624 2.84003L1.17627 10L0 8.82373L7.15914 1.66376H0.849347V0H10V9.15065H8.33624V2.84003Z" />
                                     </svg>
                                  </a>
-                              </li>							  
+                              </li>
+                              <li>
+                                 <a href="partners-faqs.html">
+                                    Partners FAQs 
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+                                       <path d="M8.33624 2.84003L1.17627 10L0 8.82373L7.15914 1.66376H0.849347V0H10V9.15065H8.33624V2.84003Z" />
+                                    </svg>
+                                 </a>
+                              </li>										  
                            </ul>
                         </li>
                         <li>
@@ -353,6 +443,7 @@
                      <ul class="sub-menu">
                         <li><a href="our-partners.html">Our Partners</a></li>
                         <li><a href="partnership-program.html">Partnership Program</a></li>
+						<li><a href="partners-faqs.html">Partners FAQs</a></li>
                      </ul>
                   </li>
                   <li class="menu-item-has-children">
@@ -430,7 +521,7 @@
                   <div class="nav nav-tabs" id="nav-tab" role="tablist">
                      <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Billed Monthly</button>
                      <button class="nav-link yearly" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Billed Yearly
-                     <span>-20 Off</span></button>
+                     <span> 20% Off</span></button>
                   </div>
                </nav>
                <div class="tab-content" id="nav-tabContent">
@@ -440,8 +531,8 @@
                            <div class="pricing-card">
                               <div class="pricing-top">
                                  <span>Free Forever</span>
-                                 <h2>₹ 0/-<sub> <br />for 3 Users</sub></h2>
-                              </div>
+									<h2><span class="currency" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;">₹</span><span class="amount" data-inr="0" data-usd="0" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;"> 0 </span>/-<sub><br>for 3 Users</sub></h2>
+                              </div>						  
                               <div class="pricing-content">
                                  <ul>
                                     <li>
@@ -618,7 +709,7 @@
                            <div class="pricing-card two">
                               <div class="pricing-top">
                                  <span>Pro</span>
-                                 <h2>₹ 999/-<sub><br />/user/month</sub></h2>
+									<h2><span class="currency" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;">₹</span><span class="amount" data-inr="999" data-usd="11" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;"> 999 </span>/-<sub><br>/user/month</sub></h2>								 
                               </div>
                               <div class="pricing-content">
                                  <ul>
@@ -803,7 +894,7 @@
                            <div class="pricing-card">
                               <div class="pricing-top">
                                  <span>Ultimate</span>
-                                 <h2>₹ 1199/-<sub><br />/user/month</sub></h2>
+									<h2><span class="currency" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;">₹</span><span class="amount" data-inr="1199" data-usd="13" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;"> 1199 </span>/-<sub><br>/user/month</sub></h2>
                               </div>
                               <div class="pricing-content">
                                  <ul>
@@ -993,7 +1084,7 @@
                            <div class="pricing-card">
                               <div class="pricing-top">
                                  <span>Free Forever</span>
-                                 <h2>₹ 0/-<sub> <br />for 3 Users</sub></h2>
+                                 <h2><span class="currency" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;">₹</span><span class="amount" data-inr="0" data-usd="0" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;"> 0 </span>/-<sub><br>for 3 Users</sub></h2>
                               </div>
                               <div class="pricing-content">
                                  <ul>
@@ -1171,7 +1262,7 @@
                            <div class="pricing-card two">
                               <div class="pricing-top">
                                  <span>Pro</span>
-                                 <h2>₹ 799/-<sub><br />/user/year</sub></h2>
+									<h2><span class="currency" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;">₹</span><span class="amount" data-inr="799" data-usd="9" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;"> 799 </span>/-<sub><br>/user/year</sub></h2>
                               </div>
                               <div class="pricing-content">
                                  <ul>
@@ -1356,7 +1447,7 @@
                            <div class="pricing-card">
                               <div class="pricing-top">
                                  <span>Ultimate</span>
-                                 <h2>₹ 959/-<sub><br />/user/year</sub></h2>
+                                 	<h2><span class="currency" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;">₹</span><span class="amount" data-inr="959" data-usd="11" style="font-weight:800; font-size:50px; line-height:44px; color:#0b0c0c;"> 959 </span>/-<sub><br>/user/year</sub></h2>
                               </div>
                               <div class="pricing-content">
                                  <ul>
